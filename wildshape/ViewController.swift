@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     
     @IBAction func toList(_ sender: UIButton) {
         sender.setTitle("[sceneChange]", for: .normal)
+        wildshape.toList()
     }
     
     
@@ -24,3 +25,4 @@ class ViewController: UIViewController {
     
 }
 
+func toList(){}
