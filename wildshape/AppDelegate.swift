@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  wildshape
 //
-//  Created by Guest User on 11/18/24.
+//  Created by Forest
 //
 
 import UIKit
