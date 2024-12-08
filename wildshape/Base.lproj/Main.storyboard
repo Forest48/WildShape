@@ -34,7 +34,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Open"/>
                                 <connections>
                                     <action selector="toList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V7t-Zd-C9c"/>
-                                    <segue destination="M2r-JW-Cj4" kind="show" id="oB8-ii-HDW"/>
+                                    <segue destination="M2r-JW-Cj4" kind="presentation" id="7ne-5e-NXg"/>
                                 </connections>
                             </button>
                         </subviews>

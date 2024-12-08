@@ -7,7 +7,7 @@
 
 
 class Shape {
-    var beastName: String
+    var beastName: String = "unnamed beast"
     var size: Int = 2 // 0 for tiny, 1 for small, 2 for medium, etc.
     var type = "Beast"
     var cr: Int = 0 // -1 is half, -2 is quarter, -3 is eigth
@@ -29,14 +29,11 @@ class Shape {
     var darkVision: Int = 0
     var blindSight: Int = 0
     
-    var abilities: [[String:String]]
-    var actions: [[String:String]]
+    var abilities: [[String:String]] = [[:]]
+    var actions: [[String:String]] = [[:]]
     
     // Default Beast
     init() {
-        beastName = "Default Beast"
-        abilities = [[:]]
-        actions = [["Default Creature":"If you see his creature something is horribly wrong.  Your character takes 1 psychic damage per turn until they die.  When a character dies in this way, they cannot be revived"]]
     }
     
     init(name: String, sz: Int, ac: Int, hp: Int, cr: Int, speed: Int, cspeed: Int, sspeed: Int, fspeed: Int, str:Int, dex: Int, con: Int, int: Int, wis: Int, cha: Int, dv: Int, bs: Int, abil: [[String:String]], acts: [[String:String]]) {
