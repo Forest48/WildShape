@@ -7,10 +7,11 @@
 
 import UIKit
 
+var shapeList: [Shape] = []
+var selectedBeast: Int = 3
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    
-    var shapeList: [Shape] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +34,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-}
-
-
-class ViewDetails: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        selectedBeast = indexPath.row
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toDetails") {
+            let path = self.tableView.indexPathForSelectedRow!
+            selectedBeast = path.row
+        }
+    }
+    
 }
+
+
 

@@ -32,12 +32,8 @@ class Shape {
     var beastAbilities: [[String:String]] = [[:]]
     var beastActions: [[String:String]] = [[:]]
     
-    // Default Beast
-    init() {
-    }
-    
     // Shape(name: "", size: , ac: , hp: , cr: , speed: , cspeed: , sspeed: , fspeed: , str: , dex: , con: , int: , wis: , cha: , dv: , bs: , abilities: [], actions: [])
-    init(name: String, size: Int, ac: Int, hp: Int, cr: Int, speed: Int, cspeed: Int, sspeed: Int, fspeed: Int, str:Int, dex: Int, con: Int, int: Int, wis: Int, cha: Int, dv: Int, bs: Int, abilities: [[String:String]], actions: [[String:String]]) {
+    init(name: String = "unnamed Beast", size: Int = 2, ac: Int = 8, hp: Int = 1, cr: Int = -4, speed: Int = 0, cspeed: Int = 0, sspeed: Int = 0, fspeed: Int = 0, str: Int = 10, dex: Int = 10, con: Int = 10, int: Int = 10, wis: Int = 10, cha: Int = 10, dv: Int = 0, bs: Int = 0, abilities: [[String:String]] = [], actions: [[String:String]] = []) {
         beastName = name
         beastSize = size
         beastAC = ac
@@ -56,6 +52,44 @@ class Shape {
         beastBlindSight = bs
         beastAbilities = abilities
         beastActions = actions
+    }
+    
+    func readSize()-> String{
+        switch beastSize {
+        case 0:
+            return "tiny"
+        case 1:
+            return "small"
+        case 2:
+            return "medium"
+        case 3:
+            return "large"
+        case 4:
+            return "huge"
+        case 5:
+            return "gargantuan"
+        default:
+            return ""
+        }
+    }
+    
+    func readCR()-> String{
+        switch beastCR {
+        case -1:
+            return "1//2"
+        case -2:
+            return "1//4"
+        case -3:
+            return "1//8"
+        //case -4:
+          //  return "0"
+        default:
+            return "\(beastCR)"
+        }
+    }
+    
+    func readModifier(score: Int)-> Int{
+        return abs((score - 10) / 2)
     }
     
 }
