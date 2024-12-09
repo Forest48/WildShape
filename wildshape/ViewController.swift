@@ -33,7 +33,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
-    
+}
+
+
+class ViewDetails: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
