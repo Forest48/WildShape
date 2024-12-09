@@ -10,7 +10,7 @@ class Shape {
     var beastName: String = "unnamed beast"
     var beastSize: Int = 2 // 0 for tiny, 1 for small, 2 for medium, etc.
     var beastType = "Beast"
-    var beastCR: Int = 0 // -1 is half, -2 is quarter, -3 is eigth
+    var beastCR: Int = 0 // -1 is half, -2 is quarter, -3 is eigth, -4 iszero
     var beastAC: Int = 0
     var beastHP: Int = 0
     

@@ -7,21 +7,33 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
+    
+    var shapeList: [Shape] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        shapeList = makeDefaultList()
     }
     
-    @IBAction func toList(_ sender: UIButton) {
-        sender.setTitle("[sceneChange]", for: .normal)
-        // ovh hagec tem'okklen???
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shapeList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shapeCell", for: indexPath)
+        cell.textLabel?.text = shapeList[indexPath.row].beastName
+        return cell
     }
     
     
-    @IBAction func toSettings(_ sender: UIButton) {
-        sender.setTitle("unfinished", for: .normal)
-    }
     
 }
 
