@@ -33,7 +33,7 @@ class Shape {
     var beastActions: [[String:String]] = [[:]]
     
     // Shape(name: "", size: , ac: , hp: , cr: , speed: , cspeed: , sspeed: , fspeed: , str: , dex: , con: , int: , wis: , cha: , dv: , bs: , abilities: [], actions: [])
-    init(name: String = "unnamed Beast", size: Int = 2, ac: Int = 8, hp: Int = 1, cr: Int = -4, speed: Int = 0, cspeed: Int = 0, sspeed: Int = 0, fspeed: Int = 0, str: Int = 10, dex: Int = 10, con: Int = 10, int: Int = 10, wis: Int = 10, cha: Int = 10, dv: Int = 0, bs: Int = 0, abilities: [[String:String]] = [], actions: [[String:String]] = []) {
+    init(name: String = "unnamed Beast", size: Int = 2, ac: Int = 8, hp: Int = 1, cr: Int = -5, speed: Int = 0, cspeed: Int = 0, sspeed: Int = 0, fspeed: Int = 0, str: Int = 10, dex: Int = 10, con: Int = 10, int: Int = 10, wis: Int = 10, cha: Int = 10, dv: Int = 0, bs: Int = 0, abilities: [[String:String]] = [], actions: [[String:String]] = []) {
         beastName = name
         beastSize = size
         beastAC = ac
@@ -81,15 +81,42 @@ class Shape {
             return "1//4"
         case -3:
             return "1//8"
-        //case -4:
-          //  return "0"
+        case -4:
+            return "0"
         default:
             return "\(beastCR)"
         }
     }
     
-    func readModifier(score: Int)-> Int{
-        return abs((score - 10) / 2)
+    func readModifier(abil: String)-> String{
+        var score: Int
+        switch abil{
+        case "STR":
+            score = beastSTR
+            break
+        case "DEX":
+            score = beastDEX
+            break
+        case "CON":
+            score = beastCON
+            break
+        case "INT":
+            score = beastINT
+            break
+        case "WIS":
+            score = beastWIS
+            break
+        case "CHA":
+            score = beastCHA
+            break
+        default:
+            return "ERR"
+        }
+        let mod = (score - 10) / 2
+        if mod < 0 {
+            return "\(mod)"
+        }
+        return "+\(mod)"
     }
     
 }
