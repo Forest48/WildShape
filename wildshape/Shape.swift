@@ -8,53 +8,54 @@
 
 class Shape {
     var beastName: String = "unnamed beast"
-    var size: Int = 2 // 0 for tiny, 1 for small, 2 for medium, etc.
-    var type = "Beast"
-    var cr: Int = 0 // -1 is half, -2 is quarter, -3 is eigth
-    var ac: Int = 0
-    var hp: Int = 0
+    var beastSize: Int = 2 // 0 for tiny, 1 for small, 2 for medium, etc.
+    var beastType = "Beast"
+    var beastCR: Int = 0 // -1 is half, -2 is quarter, -3 is eigth
+    var beastAC: Int = 0
+    var beastHP: Int = 0
     
     var landSpeed: Int = 0
     var climbSpeed: Int = 0
     var swimSpeed: Int = 0
     var flySpeed: Int = 0
     
-    var str: Int = 10
-    var dex: Int = 10
-    var con: Int = 10
-    var int: Int = 10
-    var wis: Int = 10
-    var cha: Int = 10
+    var beastSTR: Int = 10
+    var beastDEX: Int = 10
+    var beastCON: Int = 10
+    var beastINT: Int = 10
+    var beastWIS: Int = 10
+    var beastCHA: Int = 10
     
-    var darkVision: Int = 0
-    var blindSight: Int = 0
+    var beastDarkVision: Int = 0
+    var beastBlindSight: Int = 0
     
-    var abilities: [[String:String]] = [[:]]
-    var actions: [[String:String]] = [[:]]
+    var beastAbilities: [[String:String]] = [[:]]
+    var beastActions: [[String:String]] = [[:]]
     
     // Default Beast
     init() {
     }
     
-    init(name: String, sz: Int, ac: Int, hp: Int, cr: Int, speed: Int, cspeed: Int, sspeed: Int, fspeed: Int, str:Int, dex: Int, con: Int, int: Int, wis: Int, cha: Int, dv: Int, bs: Int, abil: [[String:String]], acts: [[String:String]]) {
+    // Shape(name: "", size: , ac: , hp: , cr: , speed: , cspeed: , sspeed: , fspeed: , str: , dex: , con: , int: , wis: , cha: , dv: , bs: , abilities: [], actions: [])
+    init(name: String, size: Int, ac: Int, hp: Int, cr: Int, speed: Int, cspeed: Int, sspeed: Int, fspeed: Int, str:Int, dex: Int, con: Int, int: Int, wis: Int, cha: Int, dv: Int, bs: Int, abilities: [[String:String]], actions: [[String:String]]) {
         beastName = name
-        size = sz
-        self.ac = ac
-        self.hp = hp
+        beastSize = size
+        beastAC = ac
+        beastHP = hp
         landSpeed = speed
         climbSpeed = cspeed
         swimSpeed = sspeed
         flySpeed = fspeed
-        self.str = str
-        self.dex = dex
-        self.con = con
-        self.int = int
-        self.wis = wis
-        self.cha = cha
-        darkVision = dv
-        blindSight = bs
-        abilities = abil
-        actions = acts
+        beastSTR = str
+        beastDEX = dex
+        beastCON = con
+        beastINT = int
+        beastWIS = wis
+        beastCHA = cha
+        beastDarkVision = dv
+        beastBlindSight = bs
+        beastAbilities = abilities
+        beastActions = actions
     }
     
 }

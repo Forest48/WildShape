@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZW-Tv-w12">
-                                <rect key="frame" x="290" y="783" width="87" height="35"/>
+                                <rect key="frame" x="282" y="783" width="104" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Settings"/>
+                                <buttonConfiguration key="configuration" style="filled" title="DarkMode"/>
                                 <connections>
                                     <action selector="toSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yX0-QN-i41"/>
                                 </connections>
@@ -34,7 +34,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Open"/>
                                 <connections>
                                     <action selector="toList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V7t-Zd-C9c"/>
-                                    <segue destination="M2r-JW-Cj4" kind="presentation" id="7ne-5e-NXg"/>
+                                    <segue destination="aAh-O8-Uwt" kind="presentation" id="nIQ-1C-H7o"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -54,33 +54,32 @@
             <point key="canvasLocation" x="32.824427480916029" y="-27.464788732394368"/>
         </scene>
         <!--Table View Controller-->
-        <scene sceneID="pJK-pw-L8M">
+        <scene sceneID="XVQ-gP-f3F">
             <objects>
-                <tableViewController id="M2r-JW-Cj4" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="73Y-2D-psv">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                <tableViewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="aAh-O8-Uwt" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="94A-1v-Zh2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ISa-ot-xz1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rjD-Ns-dDO">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ISa-ot-xz1" id="2a8-5H-0d8">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rjD-Ns-dDO" id="AIY-43-0uo">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="M2r-JW-Cj4" id="oFu-Cu-1q9"/>
-                            <outlet property="delegate" destination="M2r-JW-Cj4" id="XCu-L6-N0M"/>
+                            <outlet property="dataSource" destination="aAh-O8-Uwt" id="mGN-7M-zF6"/>
+                            <outlet property="delegate" destination="aAh-O8-Uwt" id="2S4-8x-BLv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="oVb-eh-b25"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o3v-dZ-Hzx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vDW-vh-gVg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="-27"/>
+            <point key="canvasLocation" x="904" y="-44"/>
         </scene>
     </scenes>
     <resources>

@@ -7,7 +7,8 @@
 
 import UIKit
 
-let shapeList:[Shape] = []
+
+var shapeList: [Shape] = []
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @ IBOutlet weak var tableView: UITableView!
@@ -16,6 +17,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        shapeList = makeDefaultList()
     }
     
 //    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -27,7 +29,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noteListView", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shapeCell", for: indexPath)
+        cell.textLabel!.text = shapeList[indexPath.row].beastName
         return cell
     }
     
