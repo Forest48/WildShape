@@ -35,14 +35,37 @@ class DetailsViewController: UIViewController {
     func upDateText() {
         showName.text = "\(displayShape.beastName)"
         showSizeType.text = "\(displayShape.readSize()) \(displayShape.beastType)"
-        showCRHPAC.text = "CR:\(displayShape.beastCR) \tHP:\(displayShape.beastHP) \tAC:\(displayShape.beastAC)"
+        showCRHPAC.text = "CR:\(displayShape.readCR()) \tHP:\(displayShape.beastHP) \tAC:\(displayShape.beastAC)"
         showSTR.text = "STR\n\(displayShape.beastSTR)\n\(displayShape.readModifier(abil:"STR"))"
         showDEX.text = "DEX\n\(displayShape.beastDEX)\n\(displayShape.readModifier(abil:"DEX"))"
         showCON.text = "CON\n\(displayShape.beastCON)\n\(displayShape.readModifier(abil:"CON"))"
         showINT.text = "INT\n\(displayShape.beastINT)\n\(displayShape.readModifier(abil:"INT"))"
         showWIS.text = "WIS\n\(displayShape.beastWIS)\n\(displayShape.readModifier(abil:"WIS"))"
         showCHA.text = "CHA\n\(displayShape.beastCHA)\n\(displayShape.readModifier(abil:"CHA"))"
+        showOther.text = "\(displayShape.readVision()) \(displayShape.readMovement()) \(displayShape.readAbilities()) \(displayShape.readActions())"
+        showOther.frame.size.width = 360
+        showOther.sizeToFit()
+        
     }
+    
+    // swipe is coming from the right
+    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+        if(selectedBeast > 0) {
+            selectedBeast-=1
+            self.displayShape = shapeList[selectedBeast]
+        }
+        upDateText()
+    }
+    
+    // swipe is comoing from the left
+    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
+        if(selectedBeast < shapeList.count - 1) {
+            selectedBeast+=1
+            self.displayShape = shapeList[selectedBeast]
+        }
+        upDateText()
+    }
+    
     
 }
 

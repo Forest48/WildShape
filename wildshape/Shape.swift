@@ -38,6 +38,7 @@ class Shape {
         beastSize = size
         beastAC = ac
         beastHP = hp
+        beastCR = cr
         landSpeed = speed
         climbSpeed = cspeed
         swimSpeed = sspeed
@@ -76,11 +77,11 @@ class Shape {
     func readCR()-> String{
         switch beastCR {
         case -1:
-            return "1//2"
+            return "1/2"
         case -2:
-            return "1//4"
+            return "1/4"
         case -3:
-            return "1//8"
+            return "1/8"
         case -4:
             return "0"
         default:
@@ -119,4 +120,66 @@ class Shape {
         return "+\(mod)"
     }
     
+    func readVision()-> String {
+        var returnString = ""
+        if(beastDarkVision > 0) {
+            returnString += "DarkVision: \(beastDarkVision)\t\t"
+        }
+        if(beastBlindSight > 0) {
+            returnString += "BlindSight: \(beastBlindSight)"
+        }
+        if(returnString != "") {
+            returnString += "\n\n"
+        }
+        return returnString
+    }
+    
+    func readMovement()-> String {
+        var returnString = ""
+        if(landSpeed > 0) {
+            returnString += "Movement: \(landSpeed)\t\t"
+        }
+        if(climbSpeed > 0) {
+            returnString += "Climbing: \(climbSpeed)\t\t"
+        }
+        if(swimSpeed > 0) {
+            returnString += "Swim: \(swimSpeed)\t\t"
+        }
+        if(flySpeed > 0) {
+            returnString += "Fly: \(flySpeed)"
+        }
+        if(returnString != "") {
+            returnString += "\n\n"
+        }
+        return returnString
+    }
+    
+    func readAbilities()-> String {
+        var returnString = ""
+        if(beastAbilities.count != 0) {
+            returnString += "*Abilities:\n"
+        }
+        for item in beastAbilities {
+            for(abilName, desc) in item {
+                returnString += "*\(abilName)* \(desc)\n"
+            }
+        }
+        if(returnString != "") {
+            returnString += "\n"
+        }
+        return returnString
+    }
+    
+    func readActions()-> String {
+        var returnString = ""
+        if(beastActions.count != 0) {
+            returnString += "Actions:\n"
+        }
+        for item in beastActions {
+            for(actName, desc) in item {
+                returnString += "*\(actName)* \(desc)\n"
+            }
+        }
+        return returnString
+    }
 }
