@@ -58,17 +58,17 @@ class Shape {
     func readSize()-> String{
         switch beastSize {
         case 0:
-            return "tiny"
+            return "Tiny"
         case 1:
-            return "small"
+            return "Small"
         case 2:
-            return "medium"
+            return "Medium"
         case 3:
-            return "large"
+            return "Large"
         case 4:
-            return "huge"
+            return "Huge"
         case 5:
-            return "gargantuan"
+            return "Gargantuan"
         default:
             return ""
         }
@@ -123,10 +123,10 @@ class Shape {
     func readVision()-> String {
         var returnString = ""
         if(beastDarkVision > 0) {
-            returnString += "DarkVision: \(beastDarkVision)\t\t"
+            returnString += "DarkVision: \(beastDarkVision) ft\t\t"
         }
         if(beastBlindSight > 0) {
-            returnString += "BlindSight: \(beastBlindSight)"
+            returnString += "BlindSight: \(beastBlindSight) ft"
         }
         if(returnString != "") {
             returnString += "\n\n"
@@ -137,16 +137,16 @@ class Shape {
     func readMovement()-> String {
         var returnString = ""
         if(landSpeed > 0) {
-            returnString += "Movement: \(landSpeed)\t\t"
+            returnString += "Grounded: \(landSpeed)ft\t\t"
         }
         if(climbSpeed > 0) {
-            returnString += "Climbing: \(climbSpeed)\t\t"
+            returnString += "Climbing: \(climbSpeed)ft\t\t"
         }
         if(swimSpeed > 0) {
-            returnString += "Swim: \(swimSpeed)\t\t"
+            returnString += "Swim: \(swimSpeed)ft\t\t"
         }
         if(flySpeed > 0) {
-            returnString += "Fly: \(flySpeed)"
+            returnString += "Fly: \(flySpeed)ft"
         }
         if(returnString != "") {
             returnString += "\n\n"
@@ -157,7 +157,7 @@ class Shape {
     func readAbilities()-> String {
         var returnString = ""
         if(beastAbilities.count != 0) {
-            returnString += "*Abilities:\n"
+            returnString += "Abilities:\n"
         }
         for item in beastAbilities {
             for(abilName, desc) in item {
