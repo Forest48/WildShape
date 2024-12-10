@@ -113,11 +113,24 @@ class Shape {
         default:
             return "ERR"
         }
-        let mod = (score - 10) / 2
-        if mod < 0 {
-            return "\(mod)"
+        if(score >= 10) {
+            let mod = (score - 10) / 2
+            return "+\(mod)"
         }
-        return "+\(mod)"
+        switch score {
+        case 1:
+            return "-5"
+        case 2...3:
+            return "-4"
+        case 4...5:
+            return "-3"
+        case 6...7:
+            return "-2"
+        case 8...9 :
+            return "-1"
+        default:
+            return "ERR"
+        }
     }
     
     func readVision()-> String {

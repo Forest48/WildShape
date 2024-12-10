@@ -8,16 +8,19 @@
 import UIKit
 
 var shapeList: [Shape] = []
-var selectedBeast: Int = 3
+var selectedBeast: Int = -3
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toSortFettings: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        shapeList = makeDefaultList()
+        if(shapeList.count == 0) {
+            shapeList = makeDefaultList()
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,6 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedBeast = path.row
         }
     }
+    
     
 }
 
