@@ -11,18 +11,27 @@ class SettingsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        resetSettings()
+    }
+    
+    func resetSettings() {
+        moon = false
+        wantSwim = true
+        wantFly = true
+        wantClimb = true
+        wantVanillaMove = true
     }
     
     
     // circle toggle
     @IBAction func toggleCircle(_ sender: UIButton) {
         if(!moon) {
-            sender.setTitle("To Land", for: .normal)
+            sender.setImage(UIImage(systemName: "moon.fill"), for: .normal)
             moon = true
             return
         }
         else if(moon) {
-            sender.setTitle("To Moon", for: .normal)
+            sender.setImage(UIImage(systemName: "mountain.2.fill"), for: .normal)
             moon = false
             return
         }
@@ -30,6 +39,14 @@ class SettingsView: UIViewController {
     }
     
     var moon: Bool = false
+    
+    func makeList() {
+        if(moon) {
+            addMoonForms()
+            return
+        }
+        takeMoonForms()
+    }
     
     func addMoonForms() {
         shapeList = addMoonList(oldList: shapeList)
@@ -44,6 +61,9 @@ class SettingsView: UIViewController {
     var wantFly: Bool = true
     var wantClimb: Bool = true
     var wantVanillaMove: Bool = true
+    var wantDV: Bool = false
+    var wantBS: Bool = false
+    
     
     @IBAction func swimToggle(_ sender: UISwitch) {
         wantSwim = !wantSwim
@@ -57,23 +77,46 @@ class SettingsView: UIViewController {
     @IBAction func vanillaToggle(_ sender: UISwitch) {
         wantVanillaMove = !wantVanillaMove
     }
+    @IBAction func dvToggle(_ sender: UISwitch) {
+        wantDV = !wantDV
+    }
+    @IBAction func bsToggle(_ sender: UISwitch) {
+        wantBS = !wantBS
+    }
+    
+    
+    
     
     func filterList() {
         var newList: [Shape] = []
-        for beast in shapeList {
-            if(wantVanillaMove && beast.landSpeed > 0) {
-                newList.append(beast)
-            }
-            else if(wantSwim && beast.swimSpeed > 0) {
-                newList.append(beast)
-            }
-            else if(wantFly && beast.flySpeed > 0) {
-                newList.append(beast)
-            }
-            else if(wantClimb && beast.climbSpeed > 0) {
-                newList.append(beast)
+        if(wantVanillaMove || wantSwim || wantFly || wantClimb) {
+            for beast in shapeList {
+                if(wantVanillaMove && beast.landSpeed > 0) {
+                    newList.append(beast)
+                }
+                else if(wantSwim && beast.swimSpeed > 0) {
+                    newList.append(beast)
+                }
+                else if(wantFly && beast.flySpeed > 0) {
+                    newList.append(beast)
+                }
+                else if(wantClimb && beast.climbSpeed > 0) {
+                    newList.append(beast)
+                }
             }
         }
+        if(newList.count == 0) {
+            newList = shapeList
+        }
+        if(wantDV || wantBS) {
+            if(wantDV) {
+                newList.removeAll {$0.beastDarkVision == 0}
+            }
+            if(wantBS) {
+                newList.removeAll {$0.beastBlindSight == 0}
+            }
+        }
+        
         shapeList = newList
     }
     
@@ -87,30 +130,30 @@ class SettingsView: UIViewController {
         doMainSort()
     }
     
+        // the functions used in these functions can be found in SortFunctions
     func doMainSort() {
         var sortedList: [Shape] = []
         switch mainSort {
         case 0:
-            sortedList = shapeList.sorted {$0.beastCR < $1.beastCR}
+            sortedList = sortCR(baseList: shapeList)
         case 1:
-            sortedList = shapeList.sorted {$0.beastName < $1.beastName}
+            sortedList = sortName(baseList: shapeList)
         case 2:
-            sortedList = shapeList.sorted {$0.beastHP > $1.beastHP}
+            sortedList = sortHP(baseList: shapeList)
         default:
             return
         }
         shapeList = sortedList
     }
-    
     func doSecondarySort() {
         var sortedList: [Shape] = []
         switch mainSort {
         case 0:
-            sortedList = shapeList.sorted {$0.beastName < $1.beastName}
+            sortedList = sortName(baseList: shapeList)
         case 1:
-            sortedList = shapeList.sorted {$0.beastCR < $1.beastCR}
+            sortedList = sortCR(baseList: shapeList)
         case 2:
-            sortedList = shapeList.sorted {$0.beastHP > $1.beastHP}
+            sortedList = sortHP(baseList: shapeList)
         default:
             return
         }
@@ -120,17 +163,15 @@ class SettingsView: UIViewController {
     
     
     
+    func updateList() {
+        makeList()
+        filterList()
+        doSort()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toList") {
-            if(moon) {
-                addMoonForms()
-            }
-            else {
-                takeMoonForms()
-            }
-            filterList()
-            doSort()
+            updateList()
             
         }
     }
