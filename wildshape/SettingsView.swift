@@ -105,15 +105,20 @@ class SettingsView: UIViewController {
                 }
             }
         }
-        if(newList.count == 0) {
+        else if(newList.count == 0) {
             newList = shapeList
         }
         if(wantDV || wantBS) {
-            if(wantDV) {
-                newList.removeAll {$0.beastDarkVision == 0}
+            if(wantDV && wantBS) {
+                newList.removeAll {$0.beastDarkVision == 0 || $0.beastBlindSight == 0}
             }
-            if(wantBS) {
-                newList.removeAll {$0.beastBlindSight == 0}
+            else {
+                if(wantDV) {
+                    newList.removeAll {$0.beastDarkVision == 0}
+                }
+                if(wantBS) {
+                    newList.removeAll {$0.beastBlindSight == 0}
+                }
             }
         }
         
@@ -123,50 +128,121 @@ class SettingsView: UIViewController {
     
     // sort preferences
     var mainSort: Int = 0
-    var secondSort: Int = 0
+    var secondSort: Int = 1
+    var numOptions: Int = 11
+    let optDisplay = ["CR", "Name", "HP", "STR", "DEX", "CON", "speed", "swim speed", "fly speed", "climb speed"]
+    var reverseSort1: Bool = false
+    var reverseSort2: Bool = false
     
-    func doSort() {
-        doSecondarySort()
-        doMainSort()
+    func doFullSort() {
+        doSort(optNum: secondSort, rev: reverseSort2)
+        doSort(optNum: mainSort, rev: reverseSort1)
     }
     
         // the functions used in these functions can be found in SortFunctions
-    func doMainSort() {
+    func doSort(optNum: Int, rev: Bool) {
         var sortedList: [Shape] = []
-        switch mainSort {
-        case 0:
-            sortedList = sortCR(baseList: shapeList)
-        case 1:
-            sortedList = sortName(baseList: shapeList)
-        case 2:
-            sortedList = sortHP(baseList: shapeList)
-        default:
-            return
+        if(!rev) {
+            switch optNum {
+            case 0:
+                sortedList = sortCR(baseList: shapeList)
+            case 1:
+                sortedList = sortName(baseList: shapeList)
+            case 2:
+                sortedList = sortHP(baseList: shapeList)
+            case 3:
+                sortedList = sortSTR(baseList: shapeList)
+            case 4:
+                sortedList = sortDEX(baseList: shapeList)
+            case 5:
+                sortedList = sortCON(baseList: shapeList)
+            case 6:
+                sortedList = sortSpeed(baseList: shapeList)
+            case 7:
+                sortedList = sortSspeed(baseList: shapeList)
+            case 8:
+                sortedList = sortFspeed(baseList: shapeList)
+            case 9:
+                sortedList = sortCspeed(baseList: shapeList)
+            default:
+                return
+            }
         }
-        shapeList = sortedList
-    }
-    func doSecondarySort() {
-        var sortedList: [Shape] = []
-        switch mainSort {
-        case 0:
-            sortedList = sortName(baseList: shapeList)
-        case 1:
-            sortedList = sortCR(baseList: shapeList)
-        case 2:
-            sortedList = sortHP(baseList: shapeList)
-        default:
-            return
+        else {
+            switch optNum {
+            case 0:
+                sortedList = sortCRrev(baseList: shapeList)
+            case 1:
+                sortedList = sortNameRev(baseList: shapeList)
+            case 2:
+                sortedList = sortHPrev(baseList: shapeList)
+            case 3:
+                sortedList = sortSTRrev(baseList: shapeList)
+            case 4:
+                sortedList = sortDEXrev(baseList: shapeList)
+            case 5:
+                sortedList = sortCONrev(baseList: shapeList)
+            case 6:
+                sortedList = sortSpeedRev(baseList: shapeList)
+            case 7:
+                sortedList = sortSspeedRev(baseList: shapeList)
+            case 8:
+                sortedList = sortFspeedRev(baseList: shapeList)
+            case 9:
+                sortedList = sortCspeedRev(baseList: shapeList)
+            default:
+                return
+            }
         }
         shapeList = sortedList
     }
     
+    @IBAction func sortOpt1Wheel(_ sender: UIButton) {
+        if(mainSort != numOptions - 2) {
+            mainSort+=1
+        }
+        else {
+            mainSort = 0
+        }
+        sender.setTitle(optDisplay[mainSort], for: .normal)
+    }
     
+    @IBAction func revOrder1(_ sender: UIButton) {
+        if(!reverseSort1) {
+            reverseSort1 = true
+            sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            return
+        }
+        reverseSort1 = false
+        sender.setImage(UIImage(systemName: "xmark"), for: .normal)
+    }
+    
+    @IBAction func revOrder2(_ sender: UIButton) {
+        if(!reverseSort2) {
+            reverseSort2 = true
+            sender.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            return
+        }
+        reverseSort2 = false
+        sender.setImage(UIImage(systemName: "xmark"), for: .normal)
+    }
+    
+    
+    @IBAction func sortOpt2Wheel(_ sender: UIButton) {
+        if(secondSort != numOptions - 2) {
+            secondSort+=1
+        }
+        else {
+            secondSort = 0
+        }
+        sender.setTitle(optDisplay[secondSort], for: .normal)
+    }
     
     
     func updateList() {
         makeList()
         filterList()
-        doSort()
+        doFullSort()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

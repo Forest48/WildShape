@@ -141,9 +141,7 @@ class Shape {
         if(beastBlindSight > 0) {
             returnString += "BlindSight: \(beastBlindSight) ft"
         }
-        if(returnString != "") {
-            returnString += "\n\n"
-        }
+        returnString += "\n\n"
         return returnString
     }
     
@@ -161,9 +159,7 @@ class Shape {
         if(flySpeed > 0) {
             returnString += "Fly: \(flySpeed)ft"
         }
-        if(returnString != "") {
-            returnString += "\n\n"
-        }
+        returnString += "\n\n"
         return returnString
     }
     

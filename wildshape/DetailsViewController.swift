@@ -48,11 +48,14 @@ class DetailsViewController: UIViewController {
         
     }
     
-    // swipe is coming from the right
+    // swipe is going to the right
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         if(selectedBeast > 0) {
             selectedBeast-=1
             self.displayShape = shapeList[selectedBeast]
+        }
+        else {
+            selectedBeast = shapeList.count
         }
         upDateText()
     }
@@ -62,6 +65,9 @@ class DetailsViewController: UIViewController {
         if(selectedBeast < shapeList.count - 1) {
             selectedBeast+=1
             self.displayShape = shapeList[selectedBeast]
+        }
+        else {
+            selectedBeast = -1
         }
         upDateText()
     }
