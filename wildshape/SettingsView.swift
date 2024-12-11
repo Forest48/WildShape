@@ -114,7 +114,7 @@ class SettingsView: UIViewController {
                 }
             }
         }
-        
+        newList = filterName(baseList: newList)
         shapeList = newList
     }
     
@@ -269,6 +269,35 @@ class SettingsView: UIViewController {
         }
         if(dLV <= 7) { // this CANNOT be an else if
             newList.removeAll {$0.flySpeed > 0}
+        }
+        return newList
+    }
+    
+    
+    // name search
+    @IBOutlet weak var testLabel: UILabel!
+    var searchName: String = ""
+    @IBAction func querryField(_ sender: UITextField) {
+        searchName = sender.text!
+        testLabel.text = searchName
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    func filterName(baseList: [Shape])-> [Shape] {
+        if(searchName == "") {
+            return baseList
+        }
+        var newList: [Shape] = []
+        for item in baseList {
+            var name = item.beastName.lowercased()
+            
+            if(name.contains(searchName)) {
+                newList.append(item)
+            }
         }
         return newList
     }

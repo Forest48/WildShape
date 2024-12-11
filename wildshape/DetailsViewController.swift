@@ -9,10 +9,6 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    @IBAction func editButton(_ sender: UIButton) {
-        sender.setTitle("WIP", for: .normal)
-    }
-    
     @IBOutlet weak var showName: UILabel!
     @IBOutlet weak var showSizeType: UILabel!
     @IBOutlet weak var showCRHPAC: UILabel!
