@@ -11,15 +11,6 @@ class SettingsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetSettings()
-    }
-    
-    func resetSettings() {
-        moon = false
-        wantSwim = true
-        wantFly = true
-        wantClimb = true
-        wantVanillaMove = true
     }
     
     
@@ -43,9 +34,11 @@ class SettingsView: UIViewController {
     func makeList() {
         if(moon) {
             addMoonForms()
-            return
         }
-        takeMoonForms()
+        else {
+            takeMoonForms()
+        }
+        shapeList = filterByDlv(baseList: shapeList)
     }
     
     func addMoonForms() {
@@ -129,8 +122,8 @@ class SettingsView: UIViewController {
     // sort preferences
     var mainSort: Int = 0
     var secondSort: Int = 1
+    let optDisplay = ["CR", "Name", "AC", "HP", "STR", "DEX", "CON", "speed", "swim speed", "fly speed", "climb speed"]
     var numOptions: Int = 11
-    let optDisplay = ["CR", "Name", "HP", "STR", "DEX", "CON", "speed", "swim speed", "fly speed", "climb speed"]
     var reverseSort1: Bool = false
     var reverseSort2: Bool = false
     
@@ -149,20 +142,22 @@ class SettingsView: UIViewController {
             case 1:
                 sortedList = sortName(baseList: shapeList)
             case 2:
-                sortedList = sortHP(baseList: shapeList)
+                sortedList = sortAC(baseList: shapeList)
             case 3:
-                sortedList = sortSTR(baseList: shapeList)
+                sortedList = sortHP(baseList: shapeList)
             case 4:
-                sortedList = sortDEX(baseList: shapeList)
+                sortedList = sortSTR(baseList: shapeList)
             case 5:
-                sortedList = sortCON(baseList: shapeList)
+                sortedList = sortDEX(baseList: shapeList)
             case 6:
-                sortedList = sortSpeed(baseList: shapeList)
+                sortedList = sortCON(baseList: shapeList)
             case 7:
-                sortedList = sortSspeed(baseList: shapeList)
+                sortedList = sortSpeed(baseList: shapeList)
             case 8:
-                sortedList = sortFspeed(baseList: shapeList)
+                sortedList = sortSspeed(baseList: shapeList)
             case 9:
+                sortedList = sortFspeed(baseList: shapeList)
+            case 10:
                 sortedList = sortCspeed(baseList: shapeList)
             default:
                 return
@@ -175,20 +170,22 @@ class SettingsView: UIViewController {
             case 1:
                 sortedList = sortNameRev(baseList: shapeList)
             case 2:
-                sortedList = sortHPrev(baseList: shapeList)
+                sortedList = sortACrev(baseList: shapeList)
             case 3:
-                sortedList = sortSTRrev(baseList: shapeList)
+                sortedList = sortHPrev(baseList: shapeList)
             case 4:
-                sortedList = sortDEXrev(baseList: shapeList)
+                sortedList = sortSTRrev(baseList: shapeList)
             case 5:
-                sortedList = sortCONrev(baseList: shapeList)
+                sortedList = sortDEXrev(baseList: shapeList)
             case 6:
-                sortedList = sortSpeedRev(baseList: shapeList)
+                sortedList = sortCONrev(baseList: shapeList)
             case 7:
-                sortedList = sortSspeedRev(baseList: shapeList)
+                sortedList = sortSpeedRev(baseList: shapeList)
             case 8:
-                sortedList = sortFspeedRev(baseList: shapeList)
+                sortedList = sortSspeedRev(baseList: shapeList)
             case 9:
+                sortedList = sortFspeedRev(baseList: shapeList)
+            case 10:
                 sortedList = sortCspeedRev(baseList: shapeList)
             default:
                 return
@@ -198,7 +195,7 @@ class SettingsView: UIViewController {
     }
     
     @IBAction func sortOpt1Wheel(_ sender: UIButton) {
-        if(mainSort != numOptions - 2) {
+        if(mainSort != numOptions - 1) {
             mainSort+=1
         }
         else {
@@ -229,13 +226,51 @@ class SettingsView: UIViewController {
     
     
     @IBAction func sortOpt2Wheel(_ sender: UIButton) {
-        if(secondSort != numOptions - 2) {
+        if(secondSort != numOptions - 1) {
             secondSort+=1
         }
         else {
             secondSort = 0
         }
         sender.setTitle(optDisplay[secondSort], for: .normal)
+    }
+    
+    
+    // Druid lv ticker (this affects what is in the list)
+    @IBOutlet weak var lvIndicate: UILabel!
+    var dLV: Int = 2
+    
+    @IBAction func lvTicker(_ sender: UIStepper) {
+        dLV = Int(sender.value)
+        lvIndicate.text = "\(dLV)"
+    }
+    
+    func filterByDlv(baseList: [Shape])-> [Shape] {
+    var newList: [Shape] = baseList
+        if(moon) {
+            if(dLV <= 5) {
+                newList.removeAll {$0.beastCR > 1}
+            }
+            if(dLV >= 6) {
+                let max = Int(dLV / 3)
+                newList.removeAll {$0.beastCR > max}
+            }
+        }
+        else if (!moon){
+            if(dLV <= 4) {
+                newList.removeAll {$0.beastCR > -2}
+            }
+            else if(dLV <= 7) {
+                newList.removeAll {$0.beastCR > -1}
+            }
+        }
+        if(dLV <= 3) {
+            newList.removeAll {$0.swimSpeed > 0}
+        }
+        if(dLV <= 7) { // this CANNOT be an else if
+            newList.removeAll {$0.flySpeed > 0}
+        }
+        return newList
     }
     
     

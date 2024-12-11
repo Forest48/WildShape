@@ -49,6 +49,9 @@ func sortCspeed(baseList: [Shape])-> [Shape] {
     return baseList.sorted {$0.climbSpeed > $1.climbSpeed}
 }
 
+func sortAC(baseList: [Shape])-> [Shape] {
+    return baseList.sorted {$0.beastAC > $1.beastAC}
+}
 
 // reversed order
 func sortNameRev(baseList: [Shape])-> [Shape] {
@@ -89,4 +92,8 @@ func sortFspeedRev(baseList: [Shape])-> [Shape] {
 
 func sortCspeedRev(baseList: [Shape])-> [Shape] {
     return baseList.sorted {$0.climbSpeed < $1.climbSpeed}
+}
+
+func sortACrev(baseList: [Shape])-> [Shape] {
+    return baseList.sorted {$0.beastAC < $1.beastAC}
 }
