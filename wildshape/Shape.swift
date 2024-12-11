@@ -33,8 +33,9 @@ class Shape {
     var beastActions: [[String:String]] = [[:]]
     
     // Shape(name: "", size: , ac: , hp: , cr: , speed: , cspeed: , sspeed: , fspeed: , str: , dex: , con: , int: , wis: , cha: , dv: , bs: , abilities: [], actions: [])
-    init(name: String = "unnamed Beast", size: Int = 2, ac: Int = 8, hp: Int = 1, cr: Int = -5, speed: Int = 0, cspeed: Int = 0, sspeed: Int = 0, fspeed: Int = 0, str: Int = 10, dex: Int = 10, con: Int = 10, int: Int = 10, wis: Int = 10, cha: Int = 10, dv: Int = 0, bs: Int = 0, abilities: [[String:String]] = [], actions: [[String:String]] = []) {
+    init(name: String = "unnamed Beast", type: String = "Beast", size: Int = 2, ac: Int = 8, hp: Int = 1, cr: Int = -5, speed: Int = 0, cspeed: Int = 0, sspeed: Int = 0, fspeed: Int = 0, str: Int = 10, dex: Int = 10, con: Int = 10, int: Int = 10, wis: Int = 10, cha: Int = 10, dv: Int = 0, bs: Int = 0, abilities: [[String:String]] = [], actions: [[String:String]] = []) {
         beastName = name
+        beastType = type
         beastSize = size
         beastAC = ac
         beastHP = hp
@@ -148,7 +149,7 @@ class Shape {
     func readMovement()-> String {
         var returnString = ""
         if(landSpeed > 0) {
-            returnString += "Grounded: \(landSpeed)ft\t\t"
+            returnString += "Movement: \(landSpeed)ft\t\t"
         }
         if(climbSpeed > 0) {
             returnString += "Climbing: \(climbSpeed)ft\t\t"

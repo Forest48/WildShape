@@ -293,8 +293,7 @@ class SettingsView: UIViewController {
         }
         var newList: [Shape] = []
         for item in baseList {
-            var name = item.beastName.lowercased()
-            
+            let name = item.beastName.lowercased()
             if(name.contains(searchName)) {
                 newList.append(item)
             }
